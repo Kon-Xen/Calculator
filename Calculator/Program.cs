@@ -6,17 +6,15 @@ using System.Net.NetworkInformation;
 using Calculator;
 
 var calc = new Calculator.Calculator();
-
-calc.ShowMessage( "Calculator MK1" );
-calc.ShowMessage( "Please use spaces between numbers / operators" );
+calc.ShowMessage( "***************************************" );
+calc.ShowMessage( "****         - Calculator -        ****" );
+calc.ShowMessage( "**** Accepts integers and decimals ****" );
+calc.ShowMessage( "***************************************" );
 
 calc.GetOperator();
 calc.GetNumbers();
-// calc.DoOpperation();
+calc.DoOpperation();
 calc.ShowResult();
+calc.ShowMessage( "****                               ****" );
+calc.ShowMessage( "***************************************" );
 
-//Debug
-// foreach (var number in calc.numbers)
-// {
-//     Console.WriteLine( number );
-// }

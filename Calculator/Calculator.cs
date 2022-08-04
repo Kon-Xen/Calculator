@@ -2,40 +2,47 @@ namespace Calculator;
 
 public class Calculator
 {
-    public string opperator ;
-    public string[] numbers;
-    public string ResultMessage = " ";
-    public int IntResult;
-    public decimal DecimalResult;
+    
+    private string opperator ;
+    private string[] numbers;
+    private decimal result;
+    
+    
      public void ShowMessage( string message ) 
     {
         Console.WriteLine( message );
     }
     
+     
      public void GetOperator()
      {
         while ( opperator == null)
         {
-            Console.WriteLine( "Choose operation (+,-,*,/): " );
+            Console.WriteLine( "****  Choose operator (+,-,*,/)   ***** " );
+            Console.Write( "****        " );
             var input = Console.ReadLine();
+          
             opperator = CheckOperatorIsValid( input ) ? input : null;   
         }
     }
+     
      
      public void GetNumbers()
      {
          var finished = false;
          while ( finished == false)
          {
-             Console.WriteLine( "enter numbers (seperated with space): " );
+             Console.WriteLine( "****  enter numbers                ****" );
+             Console.WriteLine( "****  seperated with space         ****" );
+             Console.Write( "**** ");
              var input = Console.ReadLine();
              var InputNumbers = input.Split(" ");
 
              foreach (var number in InputNumbers)
              {
-                 if (!CheckInputIsValid(number))
+                 if (!CheckNumberInputIsValid( number ))
                  {
-                     Console.WriteLine( "Not all numbers are valid. Did you use space ? " );
+                     Console.WriteLine( "****  Did you use space ?          ****" );
                      break;
                  }
                  numbers = InputNumbers;
@@ -44,68 +51,96 @@ public class Calculator
          }
     }
      
-     static bool CheckOperatorIsValid( string input )
+     
+     private static bool CheckOperatorIsValid( string input )
      {
-         Console.WriteLine( "did you enter a valid operator ? " );
          return input is "+" or "-" or "*" or "/";
      } 
 
-    static bool CheckInputIsValid( string input )
+     
+    private static bool CheckNumberInputIsValid( string input )
     {
         return int.TryParse(input, out var value1) || decimal.TryParse(input, out var value2);
     }
 
-    public string PrepareResultMessage()
+    
+    private string PrepareResultMessage()
     {
         string numberString = " ";
         foreach (var number in numbers)
         {
-            numberString += " " + number + " " + opperator;
+            numberString += opperator + " " + number + " " ;
         }
 
         return numberString;
     }
 
+    
     public void DoOpperation()
-    {
+    { 
         switch ( opperator )
         {
             case "+":
-               Addition( numbers );
+                result = Addition( numbers );
                 break;
             case "-":
-                Subtraction( numbers);
+                result = Subtraction( numbers);
                 break;
             case "*":
-                Multiplication( numbers );
+                result = Multiplication( numbers );
                 break;
             case "/":
-                Division(numbers);
+                result = Division( numbers );
                 break;
         }
     } 
 
+    
     public void ShowResult()
     {
-        Console.WriteLine( PrepareResultMessage() );
-        Console.WriteLine( "= " + IntResult );
+        Console.WriteLine( "****" + PrepareResultMessage() + " = " + result + " ****" );
     }
 
-    public void Addition( string[] numbers )
+    
+    private decimal Addition( string[] numbers )
     {
-        
-        // return numbers.Sum();
+        decimal summ = 0 ;
+        foreach (var number in numbers)
+        {
+           summ += Convert.ToDecimal( number );
+        }
+        return summ;
     }
-    public void Subtraction( string[] numbers )
+    
+    
+    private decimal Subtraction( string[] numbers )
     {
-        
+        decimal difference =  Convert.ToDecimal(numbers[0]) ;
+        for (int x = 1; x < numbers.Length; x++)
+        {
+            difference = difference - Convert.ToDecimal(numbers[x]);
+        }
+        return difference;
     }
-    public void Multiplication( string[] numbers )
+    
+    private decimal Multiplication( string[] numbers )
     {
-        
+        decimal product = 1 ;
+        foreach (var number in numbers)
+        {
+            product =  product * Convert.ToDecimal(number);
+        }
+        return product;
     }
-    public void Division( string[] numbers )
+    
+    
+    private decimal Division( string[] numbers )
     {
-        Console.WriteLine("");
+        decimal fraction =  Convert.ToDecimal(numbers[0]) ;
+        for (int y = 1; y < numbers.Length; y++)
+        {
+            fraction = fraction / Convert.ToDecimal(numbers[y]);
+        }
+        return fraction;
     }
 }
