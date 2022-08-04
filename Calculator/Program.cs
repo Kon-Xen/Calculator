@@ -12,7 +12,7 @@ calc.ShowMessage( "Please use spaces between numbers / operators" );
 
 calc.GetOperator();
 calc.GetNumbers();
-calc.DoOpperation();
+// calc.DoOpperation();
 calc.ShowResult();
 
 //Debug

@@ -55,13 +55,15 @@ public class Calculator
         return int.TryParse(input, out var value1) || decimal.TryParse(input, out var value2);
     }
 
-    public static void PrepareResultMessage()
+    public string PrepareResultMessage()
     {
-        static string numberString = "yo";
+        string numberString = " ";
         foreach (var number in numbers)
         {
-            numberString.Format( number + opperator);
+            numberString += " " + number + " " + opperator;
         }
+
+        return numberString;
     }
 
     public void DoOpperation()
@@ -72,7 +74,6 @@ public class Calculator
                Addition( numbers );
                 break;
             case "-":
-                ResultMessage = 
                 Subtraction( numbers);
                 break;
             case "*":
@@ -86,11 +87,13 @@ public class Calculator
 
     public void ShowResult()
     {
-        
+        Console.WriteLine( PrepareResultMessage() );
+        Console.WriteLine( "= " + IntResult );
     }
 
     public void Addition( string[] numbers )
     {
+        
         // return numbers.Sum();
     }
     public void Subtraction( string[] numbers )
