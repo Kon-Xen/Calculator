@@ -25,8 +25,13 @@ public class Calculator
             opperator = CheckOperatorIsValid( input ) ? input : null;   
         }
     }
-     
-     
+
+     public void reset()
+     {
+         opperator = null;
+     }
+
+
      public void GetNumbers()
      {
          var finished = false;
@@ -60,7 +65,13 @@ public class Calculator
      
     private static bool CheckNumberInputIsValid( string input )
     {
-        return int.TryParse(input, out var value1) || decimal.TryParse(input, out var value2);
+        if (input is not "0")
+        {
+            return decimal.TryParse(input, out var value2);
+        }
+
+        return false;
+
     }
 
     

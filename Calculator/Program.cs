@@ -6,15 +6,31 @@ using System.Net.NetworkInformation;
 using Calculator;
 
 var calc = new Calculator.Calculator();
-calc.ShowMessage( "***************************************" );
-calc.ShowMessage( "****         - Calculator -        ****" );
-calc.ShowMessage( "**** Accepts integers and decimals ****" );
-calc.ShowMessage( "***************************************" );
+var stop = false;
 
-calc.GetOperator();
-calc.GetNumbers();
-calc.DoOpperation();
-calc.ShowResult();
-calc.ShowMessage( "****                               ****" );
-calc.ShowMessage( "***************************************" );
+while ( !stop ) 
+{
+    calc.ShowMessage( "***************************************" );
+    calc.ShowMessage( "****         - Calculator -        ****" );
+    calc.ShowMessage( "**** Accepts integers and decimals ****" );
+    calc.ShowMessage( "***************************************" );
+    calc.GetOperator();
+    calc.GetNumbers();
+    calc.DoOpperation();
+    calc.ShowResult();
+    calc.ShowMessage( "****                               ****" );
+    calc.ShowMessage( "***************************************" );
+    
+    Console.WriteLine("****       exit ? y/n      ****" );
+    Console.WriteLine("**** ");
+
+    var check = Console.ReadLine();
+
+    if (check == "y")
+    {
+        stop = true;
+    }
+    calc.reset();
+}
+
 
