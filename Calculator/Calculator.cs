@@ -6,9 +6,11 @@ public class Calculator
     private string opperator ;
     private string[] numbers;
     private decimal result;
+    private string decorationsSmall = "****";
+    private string decorationsLarge = "***************************************";
+    private string[] errors = new string[2] { " Invalid input ", " !!!! Division by 0" };
     
-    
-     public void ShowMessage( string message ) 
+    public void ShowMessage( string message ) 
     {
         Console.WriteLine( message );
     }
@@ -18,15 +20,16 @@ public class Calculator
      {
         while ( opperator == null)
         {
-            Console.WriteLine( "****  Choose operator (+,-,*,/)   ***** " );
-            Console.Write( "****        " );
+            Console.WriteLine( "****  Choose operator (+,-,*,/)" );
+            Console.Write( $"{decorationsSmall}       " );
             var input = Console.ReadLine();
           
             opperator = CheckOperatorIsValid( input ) ? input : null;   
         }
     }
 
-     public void reset()
+     
+     public void Reset()
      {
          opperator = null;
      }
@@ -35,11 +38,10 @@ public class Calculator
      public void GetNumbers()
      {
          var finished = false;
-         while ( finished == false)
+         while ( finished == false )
          {
-             Console.WriteLine( "****  enter numbers                ****" );
-             Console.WriteLine( "****  seperated with space         ****" );
-             Console.Write( "**** ");
+             Console.WriteLine( $"{ decorationsSmall }  enter numbers seperated with space" );
+             Console.Write( $"{decorationsSmall} " );
              var input = Console.ReadLine();
              var InputNumbers = input.Split(" ");
 
@@ -47,7 +49,7 @@ public class Calculator
              {
                  if (!CheckNumberInputIsValid( number ))
                  {
-                     Console.WriteLine( "****  Did you use space ?          ****" );
+                     Console.WriteLine( "****  Did you use space ?" );
                      break;
                  }
                  numbers = InputNumbers;
@@ -65,7 +67,7 @@ public class Calculator
      
     private static bool CheckNumberInputIsValid( string input )
     {
-        if (input is not "0")
+        if (input.Length >= 1 )
         {
             return decimal.TryParse(input, out var value2);
         }
@@ -77,11 +79,18 @@ public class Calculator
     
     private string PrepareResultMessage()
     {
-        string numberString = " ";
-        foreach (var number in numbers)
+        string numberString = numbers[0];
+        var i = 1;
+        while ( i < numbers.Length )
         {
-            numberString += opperator + " " + number + " " ;
+            numberString += " " + opperator + " " + numbers[i] + " " ;
+            i++;
+            if (i > numbers.Length)
+            {
+                i = numbers.Length;
+            }
         }
+       
 
         return numberString;
     }
@@ -109,7 +118,7 @@ public class Calculator
     
     public void ShowResult()
     {
-        Console.WriteLine( "****" + PrepareResultMessage() + " = " + result + " ****" );
+        Console.WriteLine( $"{ decorationsSmall }   { PrepareResultMessage() } = { result } " );
     }
 
     
@@ -150,7 +159,13 @@ public class Calculator
         decimal fraction =  Convert.ToDecimal(numbers[0]) ;
         for (int y = 1; y < numbers.Length; y++)
         {
-            fraction = fraction / Convert.ToDecimal(numbers[y]);
+            var number = Convert.ToDecimal(numbers[y]); 
+            if (number == 0 )
+            {
+                ShowMessage( errors[1]);
+                break;
+            }
+            fraction = fraction / number;
         }
         return fraction;
     }

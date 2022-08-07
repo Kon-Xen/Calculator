@@ -18,11 +18,8 @@ while ( !stop )
     calc.GetNumbers();
     calc.DoOpperation();
     calc.ShowResult();
-    calc.ShowMessage( "****                               ****" );
     calc.ShowMessage( "***************************************" );
-    
-    Console.WriteLine("****       exit ? y/n      ****" );
-    Console.WriteLine("**** ");
+    calc.ShowMessage( "****           exit ? y/n          ****" );
 
     var check = Console.ReadLine();
 
@@ -30,7 +27,7 @@ while ( !stop )
     {
         stop = true;
     }
-    calc.reset();
+    calc.Reset();
 }
 
 
