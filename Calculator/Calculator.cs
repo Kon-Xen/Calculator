@@ -10,6 +10,7 @@ public class Calculator
     private string decorationsLarge = "***************************************";
     private string[] errors = new string[2] { " Invalid input ", " !!!! Division by 0" };
     
+    
     public void ShowMessage( string message ) 
     {
         Console.WriteLine( message );
@@ -49,6 +50,7 @@ public class Calculator
              {
                  if (!CheckNumberInputIsValid( number ))
                  {
+                     ShowMessage( errors[0] );
                      Console.WriteLine( "****  Did you use space ?" );
                      break;
                  }
@@ -67,7 +69,7 @@ public class Calculator
      
     private static bool CheckNumberInputIsValid( string input )
     {
-        if (input.Length >= 1 )
+        if (input.Length >= 1)
         {
             return decimal.TryParse(input, out var value2);
         }
@@ -143,12 +145,13 @@ public class Calculator
         return difference;
     }
     
+    
     private decimal Multiplication( string[] numbers )
     {
         decimal product = 1 ;
         foreach (var number in numbers)
         {
-            product =  product * Convert.ToDecimal(number);
+            product = product * Convert.ToDecimal(number);
         }
         return product;
     }
