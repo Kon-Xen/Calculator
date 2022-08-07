@@ -4,23 +4,45 @@
 using System.Diagnostics.CodeAnalysis;
 using System.Net.NetworkInformation;
 using Calculator;
+using Microsoft.VisualBasic.CompilerServices;
 
-var calc = new Calculator.Calculator();
+
 var stop = false;
+var calc = new Calculator.Calculator();
+var dateCalc = new Dateculator.Dateculator();
 
 while ( !stop ) 
 {
     calc.ShowMessage( "***************************************" );
     calc.ShowMessage( "****         - Calculator -        ****" );
-    calc.ShowMessage( "**** Accepts integers and decimals ****" );
+    calc.ShowMessage( "****   Accepts numbers and dates   ****" );
+    calc.ShowMessage( "**** (1) for numbers (2) for dates ****" );
     calc.ShowMessage( "***************************************" );
-    calc.GetOperator();
-    calc.GetNumbers();
-    calc.DoOpperation();
-    calc.ShowResult();
-    calc.ShowMessage( "***************************************" );
-    calc.ShowMessage( "****           exit ? y/n          ****" );
-
+    
+    var option = Console.ReadLine();
+    
+    if( option == "1" )
+    { 
+       
+        calc.GetOperator();
+        calc.GetNumbers();
+        calc.DoOpperation();
+        calc.ShowResult();
+        calc.ShowMessage( "***************************************" );
+        calc.ShowMessage( "****           exit ? y/n          ****" );
+    } 
+    else if (option == "2")
+    {
+        dateCalc.GetData();
+        dateCalc.ShowDate();
+        dateCalc.ShowMessage( "***************************************" );
+        dateCalc.ShowMessage( "****           exit ? y/n          ****" );
+    }
+    else
+    {
+        break;
+    }
+    
     var check = Console.ReadLine();
 
     if (check == "y")
