@@ -3,12 +3,12 @@ namespace Calculator;
 public class Calculator
 {
     
-    private string opperator ;
-    private string[] numbers;
-    private decimal result;
-    private string decorationsSmall = "****";
-    private string decorationsLarge = "***************************************";
-    private string[] errors = new string[2] { " Invalid input ", " !!!! Division by 0" };
+    protected string opperator ;
+    private string[] data;
+    protected decimal result;
+    protected string decorationsSmall = "****";
+    protected string decorationsLarge = "***************************************";
+    protected string[] errors = new string[2] { " Invalid input ", " !!!! Division by 0" };
     
     
     public void ShowMessage( string message ) 
@@ -54,7 +54,7 @@ public class Calculator
                      Console.WriteLine( "****  Did you use space ?" );
                      break;
                  }
-                 numbers = InputNumbers;
+                 data = InputNumbers;
                  finished = true;
              }
          }
@@ -81,20 +81,19 @@ public class Calculator
     
     private string PrepareResultMessage()
     {
-        string numberString = numbers[0];
+        string resultstring = data[0];
         var i = 1;
-        while ( i < numbers.Length )
+        while ( i < data.Length )
         {
-            numberString += " " + opperator + " " + numbers[i] + " " ;
+            resultstring += " " + opperator + " " + data[i] + " " ;
             i++;
-            if (i > numbers.Length)
+            if (i > data.Length)
             {
-                i = numbers.Length;
+                i = data.Length;
             }
         }
        
-
-        return numberString;
+        return resultstring;
     }
 
     
@@ -103,16 +102,16 @@ public class Calculator
         switch ( opperator )
         {
             case "+":
-                result = Addition( numbers );
+                result = Addition( data );
                 break;
             case "-":
-                result = Subtraction( numbers);
+                result = Subtraction( data);
                 break;
             case "*":
-                result = Multiplication( numbers );
+                result = Multiplication( data );
                 break;
             case "/":
-                result = Division( numbers );
+                result = Division( data );
                 break;
         }
     } 
