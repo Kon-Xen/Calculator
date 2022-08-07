@@ -115,12 +115,12 @@ public class Calculator
     
     private decimal Addition( string[] numbers )
     {
-        decimal summ = 0 ;
+        decimal sum = 0 ;
         foreach (var number in numbers)
         {
-           summ += Convert.ToDecimal( number );
+           sum += Convert.ToDecimal( number );
         }
-        return summ;
+        return sum;
     }
     
     
